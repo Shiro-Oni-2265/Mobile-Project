@@ -1,0 +1,29 @@
+project_id = "naugi"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 17
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[auth]
+enabled = true
+site_url = "vn.naugi.app://login-callback/"
+additional_redirect_urls = ["vn.naugi.app://login-callback/"]
+
+[auth.email]
+enable_signup = true
+enable_confirmations = true
+
+[functions.suggest-recipes]
+# JWT is verified explicitly with Auth.getUser; supports new asymmetric JWT keys.
+verify_jwt = false
