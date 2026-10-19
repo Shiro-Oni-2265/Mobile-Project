@@ -1,95 +1,1091 @@
 {
-  "users": [
+  "recipes": [
     {
-      "id": 1,
-      "name": "Nguyễn Văn An",
-      "email": "an.nguyen@ptit.edu.vn",
-      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
-      "role": "student",
-      "token": "mock-jwt-token-user-1"
+      "id": "sample-01",
+      "name": "Gà kho gừng",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món chính",
+      "image": null,
+      "minutes": 30,
+      "servings": 2,
+      "vegetarian": false,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "chicken",
+          "amount": 300.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "ginger",
+          "amount": 20.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "fishsauce",
+          "amount": 10.0,
+          "unit": "ml"
+        },
+        {
+          "ingredientId": "sugar",
+          "amount": 5.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Thái gà thành miếng vừa ăn, gừng thái sợi. Ướp gà với nước mắm và đường trong 10 phút.",
+        "Làm nóng nồi, đảo gà và gừng cho săn. Thêm nước xâm xấp.",
+        "Kho lửa nhỏ đến khi gà chín hoàn toàn và nước sánh. Nếm lại trước khi dùng."
+      ]
     },
     {
-      "id": 2,
-      "name": "Trần Thị Bình",
-      "email": "binh.tran@ptit.edu.vn",
-      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
-      "role": "student",
-      "token": "mock-jwt-token-user-2"
-    }
-  ],
-  "categories": [
-    { "id": 1, "name": "Điện tử & Công nghệ", "icon": "laptop" },
-    { "id": 2, "name": "Sách & Giáo trình", "icon": "book" },
-    { "id": 3, "name": "Đời sống & Tiện ích", "icon": "coffee" }
-  ],
-  "products": [
-    {
-      "id": 1,
-      "categoryId": 1,
-      "name": "Tai nghe chống ồn Bluetooth",
-      "price": 750000,
-      "rating": 4.8,
-      "inStock": true,
-      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400",
-      "description": "Tai nghe không dây pin trâu 30 giờ, chống ồn chủ động ANC."
+      "id": "sample-02",
+      "name": "Trứng sốt cà chua",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món chính",
+      "image": null,
+      "minutes": 15,
+      "servings": 2,
+      "vegetarian": false,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "egg",
+          "amount": 3.0,
+          "unit": "quả"
+        },
+        {
+          "ingredientId": "tomato",
+          "amount": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "oil",
+          "amount": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Rửa và thái cà chua. Đánh tan trứng với muối.",
+        "Đun nóng một nửa dầu, đảo trứng đến khi vừa đông rồi lấy ra.",
+        "Cho dầu còn lại vào chảo, xào mềm cà chua, thêm trứng và đảo đến khi chín."
+      ]
     },
     {
-      "id": 2,
-      "categoryId": 1,
-      "name": "Bàn phím cơ không dây TKL",
-      "price": 1200000,
-      "rating": 4.9,
-      "inStock": true,
-      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400",
-      "description": "Switch êm ái, kết nối đa thiết bị qua Bluetooth và 2.4GHz."
+      "id": "sample-03",
+      "name": "Đậu phụ sốt nấm",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món chính",
+      "image": null,
+      "minutes": 20,
+      "servings": 2,
+      "vegetarian": true,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "tofu",
+          "amount": 300.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "mushroom",
+          "amount": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "soysauce",
+          "amount": 15.0,
+          "unit": "ml"
+        },
+        {
+          "ingredientId": "oil",
+          "amount": 8.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Cắt đậu thành khối, làm sạch và thái nấm.",
+        "Làm nóng dầu, xào nấm rồi thêm nước tương và một ít nước.",
+        "Thả đậu vào, đun nhẹ khoảng 8 phút để ngấm sốt."
+      ]
     },
     {
-      "id": 3,
-      "categoryId": 2,
-      "name": "Giáo trình Lập trình Mạng INT1433",
-      "price": 85000,
-      "rating": 5.0,
-      "inStock": true,
-      "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400",
-      "description": "Kiến thức nền tảng về Socket, TCP/UDP và ứng dụng phân tán."
-    }
-  ],
-  "posts": [
-    {
-      "id": 1,
-      "userId": 1,
-      "title": "Kinh nghiệm học phát triển ứng dụng di động",
-      "content": "Để làm tốt đồ án, hãy nắm vững luồng dữ liệu MVVM và tổ chức UI component sạch sẽ.",
-      "createdAt": "2026-10-09T08:00:00Z",
-      "likes": 42
+      "id": "sample-04",
+      "name": "Canh bí đỏ thịt băm",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món canh",
+      "image": null,
+      "minutes": 25,
+      "servings": 2,
+      "vegetarian": false,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "pumpkin",
+          "amount": 300.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "pork",
+          "amount": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Gọt bí, bỏ hạt và cắt khối. Băm nhỏ thịt.",
+        "Đun nước, cho thịt vào và khuấy tơi, hớt bọt.",
+        "Thêm bí, nấu đến khi mềm và thịt chín. Nêm muối."
+      ]
     },
     {
-      "id": 2,
-      "userId": 2,
-      "title": "Top 5 công cụ AI hữu ích cho Mobile Developer",
-      "content": "Cursor, Antigravity và Claude Code giúp tăng tốc viết UI và unit test đáng kể.",
-      "createdAt": "2026-10-08T14:30:00Z",
-      "likes": 38
+      "id": "sample-05",
+      "name": "Bắp cải xào tỏi",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món rau",
+      "image": null,
+      "minutes": 15,
+      "servings": 2,
+      "vegetarian": true,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "cabbage",
+          "amount": 300.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "garlic",
+          "amount": 8.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "oil",
+          "amount": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Rửa sạch, thái bắp cải. Băm tỏi.",
+        "Phi thơm tỏi với dầu, cho bắp cải vào đảo ở lửa vừa.",
+        "Nêm muối và xào đến độ mềm mong muốn."
+      ]
+    },
+    {
+      "id": "sample-06",
+      "name": "Cá hấp gừng",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món chính",
+      "image": null,
+      "minutes": 30,
+      "servings": 2,
+      "vegetarian": false,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "fish",
+          "amount": 350.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "ginger",
+          "amount": 20.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "onion",
+          "amount": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Làm sạch cá, ướp muối. Thái gừng và hành.",
+        "Xếp hành, cá và gừng lên đĩa chịu nhiệt.",
+        "Hấp đến khi thịt cá chín hoàn toàn, dễ tách bằng nĩa."
+      ]
+    },
+    {
+      "id": "sample-07",
+      "name": "Tôm xào rau củ",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món chính",
+      "image": null,
+      "minutes": 20,
+      "servings": 2,
+      "vegetarian": false,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "shrimp",
+          "amount": 250.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "carrot",
+          "amount": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "cabbage",
+          "amount": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "oil",
+          "amount": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Rửa tôm đã bóc vỏ, thái nhỏ rau củ.",
+        "Xào cà rốt với dầu, thêm chút nước cho mềm.",
+        "Thêm tôm và bắp cải, đảo đến khi tôm chín và rau mềm. Nêm muối."
+      ]
+    },
+    {
+      "id": "sample-08",
+      "name": "Canh cà chua trứng",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món canh",
+      "image": null,
+      "minutes": 15,
+      "servings": 2,
+      "vegetarian": false,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "tomato",
+          "amount": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "egg",
+          "amount": 2.0,
+          "unit": "quả"
+        },
+        {
+          "ingredientId": "oil",
+          "amount": 5.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Thái cà chua, đánh tan trứng.",
+        "Xào cà chua với dầu, thêm 600 ml nước và đun sôi.",
+        "Rót trứng từ từ, khuấy nhẹ, nấu trứng chín rồi nêm muối."
+      ]
+    },
+    {
+      "id": "sample-09",
+      "name": "Bò xào hành tây",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món chính",
+      "image": null,
+      "minutes": 20,
+      "servings": 2,
+      "vegetarian": false,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "beef",
+          "amount": 250.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "onion",
+          "amount": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "garlic",
+          "amount": 8.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "oil",
+          "amount": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "soysauce",
+          "amount": 10.0,
+          "unit": "ml"
+        }
+      ],
+      "steps": [
+        "Thái mỏng thịt bò và hành tây. Băm tỏi.",
+        "Phi tỏi với dầu, cho bò vào đảo nhanh.",
+        "Thêm hành và nước tương, xào đến khi thịt chín."
+      ]
+    },
+    {
+      "id": "sample-10",
+      "name": "Salad dưa leo cà chua",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món rau",
+      "image": null,
+      "minutes": 10,
+      "servings": 2,
+      "vegetarian": true,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "cucumber",
+          "amount": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "tomato",
+          "amount": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "oil",
+          "amount": 5.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 1.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Rửa sạch rau, để ráo.",
+        "Thái dưa leo và cà chua vừa ăn.",
+        "Trộn nhẹ với dầu và muối ngay trước khi dùng."
+      ]
+    },
+    {
+      "id": "sample-11",
+      "name": "Cháo gà",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Ăn sáng",
+      "image": null,
+      "minutes": 45,
+      "servings": 2,
+      "vegetarian": false,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "rice",
+          "amount": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "chicken",
+          "amount": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "ginger",
+          "amount": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Vo gạo. Luộc gà với gừng đến khi chín, lấy ra xé sợi.",
+        "Nấu gạo trong nước luộc gà, khuấy định kỳ đến khi nhừ.",
+        "Cho gà trở lại nồi, nêm muối và đun nóng."
+      ]
+    },
+    {
+      "id": "sample-12",
+      "name": "Canh rau chân vịt",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món canh",
+      "image": null,
+      "minutes": 15,
+      "servings": 2,
+      "vegetarian": true,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "spinach",
+          "amount": 250.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "tofu",
+          "amount": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Rửa rau, cắt đậu thành khối.",
+        "Đun sôi 600 ml nước, cho đậu vào nấu nhẹ.",
+        "Thêm rau, nấu chín và nêm muối."
+      ]
+    },
+    {
+      "id": "sample-13",
+      "name": "Khoai tây xào thịt",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món chính",
+      "image": null,
+      "minutes": 25,
+      "servings": 2,
+      "vegetarian": false,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "potato",
+          "amount": 250.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "pork",
+          "amount": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "onion",
+          "amount": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "oil",
+          "amount": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Thái mỏng khoai, thịt và hành tây.",
+        "Xào thịt với dầu đến khi săn, thêm khoai cùng một ít nước.",
+        "Đậy nắp cho khoai mềm, thêm hành và nấu đến khi thịt chín hoàn toàn."
+      ]
+    },
+    {
+      "id": "sample-14",
+      "name": "Trứng cuộn rau củ",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món chính",
+      "image": null,
+      "minutes": 20,
+      "servings": 2,
+      "vegetarian": false,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "egg",
+          "amount": 3.0,
+          "unit": "quả"
+        },
+        {
+          "ingredientId": "carrot",
+          "amount": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "onion",
+          "amount": 50.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "oil",
+          "amount": 8.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 1.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Băm nhỏ rau củ và trộn với trứng, muối.",
+        "Làm nóng dầu, tráng một lớp trứng mỏng.",
+        "Cuộn dần và thêm trứng còn lại, nấu chín rồi cắt khoanh."
+      ]
+    },
+    {
+      "id": "sample-15",
+      "name": "Đậu phụ kho cà chua",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món chính",
+      "image": null,
+      "minutes": 25,
+      "servings": 2,
+      "vegetarian": true,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "tofu",
+          "amount": 300.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "tomato",
+          "amount": 250.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "oil",
+          "amount": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Cắt đậu, thái cà chua.",
+        "Áp chảo đậu với dầu rồi lấy ra. Xào mềm cà chua.",
+        "Cho đậu trở lại, thêm nước và muối, kho nhỏ lửa 10 phút."
+      ]
+    },
+    {
+      "id": "sample-16",
+      "name": "Cơm gà rau củ",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món chính",
+      "image": null,
+      "minutes": 40,
+      "servings": 2,
+      "vegetarian": false,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "rice",
+          "amount": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "chicken",
+          "amount": 250.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "carrot",
+          "amount": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "cucumber",
+          "amount": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Vo gạo và nấu cơm theo lượng nước phù hợp.",
+        "Luộc gà và cà rốt đến khi chín; thái dưa leo.",
+        "Xếp cơm, gà và rau ra đĩa, nêm theo khẩu vị."
+      ]
+    },
+    {
+      "id": "sample-17",
+      "name": "Nấm xào tỏi",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món rau",
+      "image": null,
+      "minutes": 15,
+      "servings": 2,
+      "vegetarian": true,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "mushroom",
+          "amount": 300.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "garlic",
+          "amount": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "oil",
+          "amount": 8.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Làm sạch nấm, để ráo và thái miếng. Băm tỏi.",
+        "Làm nóng dầu, phi tỏi rồi cho nấm vào.",
+        "Xào chín nấm và nêm muối."
+      ]
+    },
+    {
+      "id": "sample-18",
+      "name": "Canh khoai tây cà rốt",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món canh",
+      "image": null,
+      "minutes": 30,
+      "servings": 2,
+      "vegetarian": true,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "potato",
+          "amount": 200.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "carrot",
+          "amount": 150.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "mushroom",
+          "amount": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Gọt và cắt khoai, cà rốt; làm sạch nấm.",
+        "Đun nước, cho khoai và cà rốt vào nấu mềm.",
+        "Thêm nấm, nấu chín và nêm muối."
+      ]
+    },
+    {
+      "id": "sample-19",
+      "name": "Bún gà",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Ăn sáng",
+      "image": null,
+      "minutes": 35,
+      "servings": 2,
+      "vegetarian": false,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "noodle",
+          "amount": 300.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "chicken",
+          "amount": 250.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "onion",
+          "amount": 100.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "ginger",
+          "amount": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Luộc gà với gừng và hành đến khi gà chín hoàn toàn.",
+        "Lấy gà ra xé sợi, nêm nước dùng.",
+        "Làm nóng bún, xếp gà lên và chan nước dùng nóng."
+      ]
+    },
+    {
+      "id": "sample-20",
+      "name": "Bí đỏ xào tỏi",
+      "description": "Công thức gia đình cho 2 người. Điều chỉnh gia vị theo khẩu vị.",
+      "category": "Món rau",
+      "image": null,
+      "minutes": 20,
+      "servings": 2,
+      "vegetarian": true,
+      "favorite": false,
+      "sample": true,
+      "items": [
+        {
+          "ingredientId": "pumpkin",
+          "amount": 300.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "garlic",
+          "amount": 8.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "oil",
+          "amount": 10.0,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "salt",
+          "amount": 2.0,
+          "unit": "g"
+        }
+      ],
+      "steps": [
+        "Gọt bí, bỏ hạt và thái lát mỏng. Băm tỏi.",
+        "Phi tỏi với dầu, thêm bí và đảo đều.",
+        "Thêm chút nước, đậy nắp cho bí mềm rồi nêm muối."
+      ]
     }
   ],
-  "orders": [
+  "ingredients": [
     {
-      "id": 1,
-      "userId": 1,
-      "items": [{ "productId": 1, "quantity": 1 }],
-      "total": 750000,
-      "status": "COMPLETED",
-      "createdAt": "2026-10-08T10:15:00Z"
-    }
-  ],
-  "notifications": [
+      "id": "rice",
+      "name": "Gạo trắng",
+      "per100g": {
+        "kcal": 365.0,
+        "protein": 7.13,
+        "carbs": 80.0,
+        "fat": 0.66
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
     {
-      "id": 1,
-      "userId": 1,
-      "title": "Đơn hàng đã được xác nhận",
-      "message": "Đơn hàng #1 của bạn đã sẵn sàng giao.",
-      "read": false,
-      "createdAt": "2026-10-09T07:00:00Z"
+      "id": "chicken",
+      "name": "Ức gà",
+      "per100g": {
+        "kcal": 120.0,
+        "protein": 22.5,
+        "carbs": 0.0,
+        "fat": 2.62
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "pork",
+      "name": "Thịt heo nạc",
+      "per100g": {
+        "kcal": 143.0,
+        "protein": 21.4,
+        "carbs": 0.0,
+        "fat": 5.5
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "beef",
+      "name": "Thịt bò nạc",
+      "per100g": {
+        "kcal": 137.0,
+        "protein": 21.0,
+        "carbs": 0.0,
+        "fat": 5.5
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "egg",
+      "name": "Trứng gà",
+      "per100g": {
+        "kcal": 143.0,
+        "protein": 12.56,
+        "carbs": 0.72,
+        "fat": 9.51
+      },
+      "gramsPerPiece": 50.0,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "tomato",
+      "name": "Cà chua",
+      "per100g": {
+        "kcal": 18.0,
+        "protein": 0.88,
+        "carbs": 3.89,
+        "fat": 0.2
+      },
+      "gramsPerPiece": 120.0,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "tofu",
+      "name": "Đậu phụ",
+      "per100g": {
+        "kcal": 76.0,
+        "protein": 8.08,
+        "carbs": 1.87,
+        "fat": 4.78
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "shrimp",
+      "name": "Tôm bóc vỏ",
+      "per100g": {
+        "kcal": 85.0,
+        "protein": 20.1,
+        "carbs": 0.0,
+        "fat": 0.51
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "fish",
+      "name": "Cá rô phi",
+      "per100g": {
+        "kcal": 96.0,
+        "protein": 20.08,
+        "carbs": 0.0,
+        "fat": 1.7
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "cabbage",
+      "name": "Bắp cải",
+      "per100g": {
+        "kcal": 25.0,
+        "protein": 1.28,
+        "carbs": 5.8,
+        "fat": 0.1
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "carrot",
+      "name": "Cà rốt",
+      "per100g": {
+        "kcal": 41.0,
+        "protein": 0.93,
+        "carbs": 9.58,
+        "fat": 0.24
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "potato",
+      "name": "Khoai tây",
+      "per100g": {
+        "kcal": 77.0,
+        "protein": 2.05,
+        "carbs": 17.49,
+        "fat": 0.09
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "pumpkin",
+      "name": "Bí đỏ",
+      "per100g": {
+        "kcal": 26.0,
+        "protein": 1.0,
+        "carbs": 6.5,
+        "fat": 0.1
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "spinach",
+      "name": "Rau chân vịt",
+      "per100g": {
+        "kcal": 23.0,
+        "protein": 2.86,
+        "carbs": 3.63,
+        "fat": 0.39
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "cucumber",
+      "name": "Dưa leo",
+      "per100g": {
+        "kcal": 15.0,
+        "protein": 0.65,
+        "carbs": 3.63,
+        "fat": 0.11
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "mushroom",
+      "name": "Nấm mỡ",
+      "per100g": {
+        "kcal": 22.0,
+        "protein": 3.09,
+        "carbs": 3.26,
+        "fat": 0.34
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "onion",
+      "name": "Hành tây",
+      "per100g": {
+        "kcal": 40.0,
+        "protein": 1.1,
+        "carbs": 9.34,
+        "fat": 0.1
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "garlic",
+      "name": "Tỏi",
+      "per100g": {
+        "kcal": 149.0,
+        "protein": 6.36,
+        "carbs": 33.06,
+        "fat": 0.5
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "ginger",
+      "name": "Gừng",
+      "per100g": {
+        "kcal": 80.0,
+        "protein": 1.82,
+        "carbs": 17.77,
+        "fat": 0.75
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "oil",
+      "name": "Dầu ăn",
+      "per100g": {
+        "kcal": 884.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 100.0
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "salt",
+      "name": "Muối",
+      "per100g": {
+        "kcal": 0.0,
+        "protein": 0.0,
+        "carbs": 0.0,
+        "fat": 0.0
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "sugar",
+      "name": "Đường",
+      "per100g": {
+        "kcal": 387.0,
+        "protein": 0.0,
+        "carbs": 100.0,
+        "fat": 0.0
+      },
+      "gramsPerPiece": null,
+      "source": "USDA SR Legacy — giá trị tham chiếu làm tròn; nguyên liệu sống, phần ăn được"
+    },
+    {
+      "id": "fishsauce",
+      "name": "Nước mắm",
+      "per100g": null,
+      "gramsPerPiece": null,
+      "source": null
+    },
+    {
+      "id": "soysauce",
+      "name": "Nước tương",
+      "per100g": null,
+      "gramsPerPiece": null,
+      "source": null
+    },
+    {
+      "id": "noodle",
+      "name": "Bún tươi",
+      "per100g": null,
+      "gramsPerPiece": null,
+      "source": null
     }
   ]
 }

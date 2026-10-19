@@ -9,4 +9,4 @@ else
   echo ".env already exists — skipped"
 fi
 
-echo "Next: start the mock API with 'make api-up', then create your app in app/ (GETTING_STARTED.md §4)."
+echo "NauGi Flutter is already in app/. See GETTING_STARTED.md to start the API and run the app."

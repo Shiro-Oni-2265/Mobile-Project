@@ -1,0 +1,14 @@
+{
+  "name": "naugi-mock-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local REST API for the NauGi university demo",
+  "scripts": {
+    "start": "node scripts/start.cjs",
+    "test": "node --test test/contract.test.cjs",
+    "lint": "node --check scripts/start.cjs && node --check scripts/database.cjs && node --check scripts/reset.cjs && node --check test/contract.test.cjs",
+    "reset": "node scripts/reset.cjs --reset"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": { "json-server": "0.17.4" }
+}

@@ -1,126 +1,52 @@
-# Getting Started
+# Chạy NauGi từ bản clone sạch
 
-> This file explains **how to use this starter**. It is not part of your deliverable — your project report is [`README.md`](README.md).
-> Rules and grading: [`INSTRUCTION.md`](INSTRUCTION.md).
+Yêu cầu chấm điểm nằm trong [INSTRUCTION.md](INSTRUCTION.md); mô tả dự án, cấu hình và lệnh chạy đầy đủ nằm trong [README.md](README.md). Dự án Flutter đã có trong `app/`. Không chạy `flutter create` để ghi đè mã.
 
----
+## 1. Công cụ
 
-## 1. Prerequisites
+- Git, Node.js 22 và npm để chạy json-server 0.17.4.
+- Flutter 3.47.7, Dart 3.13.5, JDK 21, Android SDK (Android là nền tảng nghiệm thu chính).
+- Android emulator hoặc thiết bị Android. Docker Desktop là lựa chọn khác để chạy backend.
 
-| Tool | Needed for |
-|------|-----------|
-| [Git](https://git-scm.com/downloads) | everything |
-| [Docker Desktop](https://docs.docker.com/get-docker/) | the mock API in `backend/` (skip if you build your own backend) |
-| The SDK of your chosen framework | e.g., Node.js LTS + Expo, Flutter SDK, Android Studio, Xcode |
-| An emulator/simulator or a physical device | running the app |
-| An AI coding assistant (optional) | see [`.ai/ai-guide.md`](.ai/ai-guide.md) |
+## 2. Chạy API
 
----
+Trong PowerShell tại gốc repo:
 
-## 2. Team Repository
-
-First-time setup — GitHub account, star & fork, the private team repository created by the LMS, cloning, your first
-pull request and getting starter updates — is described step by step in
-[`docs/student-guide.md`](docs/student-guide.md). **Read it first.**
-
----
-
-## 3. Mock Backend
-
-`backend/` runs [json-server](https://github.com/typicode/json-server) (v0.17) over `backend/db.json`:
-every top-level key becomes a REST resource with full CRUD.
-
-```bash
-make api-up      # start on http://localhost:3000
-make api-logs    # watch requests from your app
-make api-down    # stop
+```powershell
+npm ci --prefix backend
+.\scripts\api.ps1 -Action start
 ```
 
-- **Adapt `backend/db.json` to your domain** — the sample data (users, products, posts, orders, ...) is only an example.
-- Useful query features: `?_page=1&_limit=10` (pagination), `?q=keyword` (full-text search),
-  `?_sort=price&_order=desc`, `?categoryId=1` (filter), `?_embed=comments` (relations).
-- Write requests (`POST/PUT/PATCH/DELETE`) modify `backend/db.json` itself. To restore the original data:
-  `git checkout backend/db.json && make api-reset`.
-- You may replace the mock with your own backend; document how to run it in the README.
+Lệnh khởi tạo `backend/runtime/db.json` từ `backend/seed.json` khi chưa có dữ liệu runtime và phục vụ API tại cổng 3000. Dữ liệu đã chỉnh sửa được giữ khi khởi động lại. Để cố ý đưa dữ liệu về seed:
 
-### Reaching the API from the app
-
-`localhost` on an emulator or phone means **the device itself**, not your computer.
-
-| App runs on | Base URL |
-|-------------|----------|
-| Android emulator | `http://10.0.2.2:3000` |
-| iOS simulator | `http://localhost:3000` |
-| Physical device on the same Wi-Fi | `http://<computer-LAN-IP>:3000` |
-| Android device via USB | run `adb reverse tcp:3000 tcp:3000`, then `http://localhost:3000` |
-
-Android blocks plain HTTP by default — allow cleartext traffic for development only.
-The root `.env` configures Docker, **not** your app; use your framework's configuration mechanism for the base URL.
-
----
-
-## 4. Create the App in `app/`
-
-Create the project **inside `app/`** with your framework's official tooling, for example:
-
-| Framework | Create |
-|-----------|--------|
-| React Native (Expo) | `cd app && npx create-expo-app@latest .` |
-| Flutter | `cd app && flutter create .` |
-| Kotlin + Jetpack Compose | Android Studio → New Project → save location `app/` |
-| Swift + SwiftUI | Xcode → New Project → save in `app/` |
-
-Check the framework's current documentation for the recommended template and libraries — they change often.
-Make sure build outputs (`node_modules/`, `build/`, `.gradle/`, `.dart_tool/`, `Pods/`, ...) are ignored by git.
-
----
-
-## 5. Workflow by Milestone
-
-```mermaid
-flowchart LR
-    M1["M1 Proposal<br/>docs/proposal.md"] --> M2["M2 Design & Walking Skeleton<br/>ui-design.md · architecture.md<br/>navigation + 1 screen with real data"]
-    M2 --> M3["M3 Final & Oral Defense<br/>all screens · offline · tests<br/>README AI Disclosure + Contribution"]
+```powershell
+.\scripts\api.ps1 -Action reset
 ```
 
-| Milestone | Checklist |
-|-----------|-----------|
-| **M1 — Proposal** | ☐ Team table + pitch in README ☐ `docs/proposal.md` complete ☐ ownership plan agreed |
-| **M2 — Design & Skeleton** | ☐ `docs/ui-design.md` (flows, screens, wireframes, tokens, UI states) ☐ `docs/architecture.md` (layers, state, data flow, offline) ☐ app runs with navigation between main screens ☐ one screen loads data through View → ViewModel → Repository → API |
-| **M3 — Final** | ☐ all screens & flows ☐ four UI states ☐ offline data ☐ tests in `docs/testing-guide.md` ☐ README complete |
+Có thể dùng Docker Compose theo [backend/README.md](backend/README.md). Nếu cổng 3000 đã bị chiếm, giải phóng cổng trước khi chạy; script không dừng tiến trình khác.
 
-**Log AI usage as you go** in [`docs/ai-log.md`](docs/ai-log.md) — two minutes after each significant session is far easier than reconstructing it the night before the deadline.
+## 3. Chạy ứng dụng
 
----
-
-## 6. Team Git Workflow
-
-```
-main  ← merge via Pull Requests only
- ├── feature/expense-list      (member 1)
- ├── feature/offline-cache     (member 2)
- └── feature/settings-screen   (member 3)
+```powershell
+cd app
+flutter pub get
+flutter run --flavor demo --dart-define-from-file=config/dev.example.json
 ```
 
-1. `git checkout -b feature/<short-name>`
-2. Commit small and often, with meaningful messages, **from your own account**.
-3. Open a Pull Request — the PR template asks how you tested it and whether AI was used.
-4. Another member reviews, then merge.
+`config/dev.example.json` trỏ Android emulator tới `http://10.0.2.2:3000`. iOS simulator dùng `config/ios.example.json` và cần máy macOS để xác minh. Thiết bị thật dùng địa chỉ LAN của máy chạy API trong cấu hình riêng; xem [README.md](README.md) và [docs/api-integration.md](docs/api-integration.md).
 
-Split work by **feature** (screen → ViewModel → repository) rather than by layer, so each member can explain a complete slice in the oral defense.
+## 4. Kiểm tra và build
 
----
+```powershell
+cd app
+dart format --output=none --set-exit-if-changed lib test integration_test
+flutter analyze
+flutter test --concurrency=1
+flutter build apk --flavor demo --dart-define-from-file=config/dev.example.json
+```
 
-## Submission Checklist
+Bài kiểm tra REST thật cần `npm ci --prefix backend` trước khi chạy `flutter test`. Kết quả và các bước kiểm tra thủ công được ghi ở [docs/testing-guide.md](docs/testing-guide.md). APK demo dùng cấu hình Android emulator; cần thay URL bằng IP LAN nếu cài trên máy thật.
 
-Before the deadline:
+## 5. Nhóm và nhật ký AI
 
-- [ ] **README:** Team, Problem & Idea, screenshots, Architecture, Quick Start, Test evidence — filled in, no template placeholders left.
-- [ ] **AI Disclosure** (README §8) and [`docs/ai-log.md`](docs/ai-log.md) complete.
-- [ ] **Contribution** table complete and **confirmed by every member**.
-- [ ] `docs/proposal.md`, `docs/ui-design.md`, `docs/architecture.md`, `docs/api-integration.md`, `docs/testing-guide.md` complete and consistent with the app.
-- [ ] App builds from a clean clone following the README; backend starts with `make api-up` (or documented alternative).
-- [ ] Every data screen handles Loading / Success / Empty / Error with retry.
-- [ ] Offline data works in airplane mode.
-- [ ] No hard-coded base URLs or secrets; no build artifacts committed.
-- [ ] Every member can explain every part they claim — see the self-check in [`.ai/ai-guide.md`](.ai/ai-guide.md#4-prepare-for-the-oral-defense).
+Nhóm tự xác nhận phần đóng góp trong README. Ghi các buổi dùng AI vào [docs/ai-log.md](docs/ai-log.md), ghi rõ phần nào nhóm giữ lại và tự kiểm chứng. Các điểm cần hiểu để bảo vệ nằm trong [docs/oral-defense.md](docs/oral-defense.md).

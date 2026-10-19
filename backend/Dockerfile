@@ -1,6 +1,8 @@
-FROM node:20-alpine
+FROM node:22-alpine
 WORKDIR /app
-RUN npm install -g json-server@0.17.4
-COPY db.json .
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+COPY scripts ./scripts
+COPY seed.json ./seed.json
 EXPOSE 3000
-CMD ["json-server", "--watch", "db.json", "--host", "0.0.0.0", "--port", "3000"]
+CMD ["npm", "start"]

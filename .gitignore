@@ -56,3 +56,11 @@ coverage/
 .pub/
 build/
 flutter_*.png
+
+.tools/
+.superpowers/
+**/.kotlin/
+
+
+# Writable local mock API data
+backend/runtime/

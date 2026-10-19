@@ -1,16 +1,14 @@
-# Project Name
+# NauGi — Hôm nay nấu gì?
 
-> **Course:** Mobile Application Development (INT1449) · PTIT · Instructor: Dr. Hung N. Dang
+> Đồ án Mobile Application Development (INT1449), PTIT.
 >
-> *One-sentence pitch: what your app does and for whom.*
+> Sổ tay bếp tiếng Việt: chọn công thức, lên thực đơn, tận dụng tủ lạnh và chuẩn bị danh sách mua, có dữ liệu cục bộ dùng khi mất mạng.
 
-👋 **New here? Read first:** [`docs/student-guide.md`](docs/student-guide.md) · 📜 Brief & grading: [`INSTRUCTION.md`](INSTRUCTION.md) · 🚀 Workflow: [`GETTING_STARTED.md`](GETTING_STARTED.md)
-
-> **Template note:** replace every *(italic placeholder)* below. Sections marked **(mandatory)** are required for grading.
-
----
+Đọc [đề bài và thang điểm](INSTRUCTION.md), [hướng dẫn sinh viên](docs/student-guide.md) và [quy trình môn học](GETTING_STARTED.md). Hướng dẫn chạy riêng của NauGi ở mục 5.
 
 ## 1. Team (mandatory)
+
+Sinh viên tự điền thông tin thực tế; không gán tên hoặc công lao từ mã được nhập hay AI tạo.
 
 | # | Full name | Student ID | Class | GitHub | Role |
 |:-:|-----------|:----------:|:-----:|--------|------|
@@ -18,122 +16,149 @@
 | 2 | | | | @ | |
 | 3 | | | | @ | |
 
-**Topic:** *(e.g., Offline-first personal expense tracker)*
-
----
+**Topic:** Sổ tay công thức, thực đơn, tủ lạnh và mua sắm cá nhân có hỗ trợ offline.
 
 ## 2. Problem & Idea (mandatory)
 
-- **Problem:** *(What problem are you solving? Who has it?)*
-- **Our idea:** *(Your solution in 2–3 sentences.)*
-- **Target users:** *(Who, and in what situation do they use the app?)*
-- **What makes it non-trivial:** *(e.g., offline sync, a complex multi-step flow, large lists, notifications.)*
-- **Out of scope:** *(What you deliberately do not build.)*
+Người tự nấu ăn khó nối công thức với nguyên liệu sẵn có và danh sách cần mua. NauGi hướng tới sinh viên ở trọ và gia đình nhỏ: xem công thức dùng chung qua REST, lập thực đơn, nhập tủ lạnh và sinh danh sách mua trên điện thoại.
 
-Full proposal: [`docs/proposal.md`](docs/proposal.md)
+Phần đáng chú ý là ranh giới online/offline: danh mục công thức/nguyên liệu dùng chung đọc và ghi qua HTTP; thực đơn, tủ lạnh, mua sắm, sở thích, yêu thích và ảnh lưu SQLite. Bản chụp công thức trong thực đơn giữ bữa cũ khi món gốc sửa/xóa. Gợi ý theo quy tắc, không dùng Gemini/LLM.
 
----
+Phạm vi không gồm đăng nhập, dữ liệu riêng trên cloud, đồng bộ đa thiết bị, upload ảnh hoặc tự đồng bộ thao tác ghi công thức offline. Xem [đề xuất](docs/proposal.md).
 
 ## 3. Screenshots & Features
 
-| *(Screen 1)* | *(Screen 2)* | *(Screen 3)* | *(Screen 4)* |
-|:---:|:---:|:---:|:---:|
-| *(image)* | *(image)* | *(image)* | *(image)* |
+Màn hình: Hôm nay, Công thức, Chi tiết, Tạo/sửa công thức, Thực đơn, Tủ lạnh, Mua sắm, Cài đặt, Nguyên liệu và Gợi ý.
 
-*(Put images in `docs/asset/` and reference them, e.g. `![Home](docs/asset/home.png)`.)*
+- Công thức/nguyên liệu dùng chung qua REST; món mẫu chỉ sao chép từ UI.
+- Thực đơn, tủ lạnh, danh sách mua và tùy chọn sửa cục bộ cả khi offline.
+- Cache danh mục cho lần mở sau; refresh lỗi giữ cache và hiển thị cảnh báo/retry.
+- Yêu thích và ảnh riêng trên từng thiết bị.
+- Tính định lượng/dinh dưỡng với thông báo thiếu dữ liệu; gợi ý giải thích được.
 
-- [ ] **Feature A:** *(short description)*
-- [ ] **Feature B:** *(short description)*
-- [ ] **Offline:** *(which data is available without network)*
-- [ ] **UI states:** Loading / Success / Empty / Error with retry on every data screen
-
----
+Ảnh chụp từ bài kiểm tra Flutter widget ở kích thước 412 × 915, dùng API giả và dữ liệu minh họa: [màn hình Hôm nay](docs/asset/naugi-home-widget.png), [chi tiết công thức](docs/asset/naugi-recipe-widget.png). Đây là ảnh render thực tế của UI trong trình chạy kiểm thử; kiểm tra trên Android được ghi riêng ở [testing-guide.md](docs/testing-guide.md).
 
 ## 4. Architecture
 
 ```mermaid
-graph TD
-    V["Views / Screens"] <-->|state ↓ events ↑| VM["ViewModels / state holders"]
-    VM --> R["Repositories"]
-    R --> API["Remote data source<br/>(REST API)"]
-    R --> DB["Local data source<br/>(database / key-value store)"]
-    API <-->|HTTP/JSON| BE[("Mock API (backend/) or own backend")]
+flowchart TD
+  V[Flutter Views] --> C[AppController / Riverpod ChangeNotifier]
+  C --> R[KitchenRepository]
+  R --> A[RecipeApi / http]
+  R --> L[LocalStore / sqflite]
+  A --> B[json-server :3000]
+  L --> D[(SQLite)]
 ```
 
-| Aspect | Our choice | Why (one line) |
-|--------|-----------|----------------|
-| Framework | | |
-| State management | | |
-| HTTP client | | |
-| Local storage | | |
+| Thành phần | Lựa chọn | Lý do |
+|---|---|---|
+| Framework | Flutter, ưu tiên Android | Giữ UI và logic NauGi, một codebase |
+| State | Riverpod + ChangeNotifier | Truy vết hành động rõ, phù hợp đồ án |
+| HTTP | package http, timeout 15 giây | Phân biệt lỗi HTTP/mạng/JSON |
+| Lưu local | sqflite, Notebook JSON | Giữ dữ liệu cá nhân và cache bền |
+| Backend | json-server 0.17.4 | REST dễ chạy và quan sát cho demo |
 
-Details: [`docs/architecture.md`](docs/architecture.md) · UI/UX: [`docs/ui-design.md`](docs/ui-design.md)
-
----
+View không gọi API hoặc SQL trực tiếp. Chi tiết: [architecture.md](docs/architecture.md), [api-integration.md](docs/api-integration.md).
 
 ## 5. Quick Start
 
-```bash
-make init && make api-up      # start the mock API on http://localhost:3000 (skip if you use your own backend)
-cd app
-# framework-specific install & run, e.g.:  npm install && npx expo start   |   flutter run
+Yêu cầu: Flutter stable **3.47.7**, Node.js **>=20**, Android SDK và emulator/thiết bị Android. Cài đặt Android SDK, license và thiết bị qua công cụ Flutter/Android của máy; chạy flutter doctor để xem phần còn thiếu. Không cần Supabase hoặc API key.
+
+Mở terminal tại repository:
+
+```powershell
+cd backend
+npm ci
+npm start
 ```
 
-| Run target | API base URL |
-|------------|--------------|
-| Android emulator | `http://10.0.2.2:3000` |
-| iOS simulator | `http://localhost:3000` |
-| Physical device | `http://<computer-LAN-IP>:3000` |
+Backend mặc định cổng 3000. Lần đầu tạo backend/runtime/db.json từ backend/seed.json; runtime không commit. Dừng API trước khi npm run reset để chủ động khôi phục seed; reset làm mất thay đổi demo. Nếu cổng 3000 đã bị chiếm, dừng dịch vụ đó hoặc đặt PORT khác và sửa API_BASE_URL tương ứng. Chi tiết: [backend/README.md](backend/README.md).
 
-*(Describe where the base URL is configured in your app and any other setup step.)*
+Mở terminal khác:
 
----
+```powershell
+cd app
+flutter pub get
+flutter run --flavor demo --dart-define-from-file=config/dev.example.json
+```
+
+| Chạy ở đâu | API_BASE_URL |
+|---|---|
+| Android emulator | http://10.0.2.2:3000 |
+| iOS simulator | http://localhost:3000 |
+| Thiết bị thật | http://IP-LAN-MAY-CHU:3000 |
+
+App nhận API_BASE_URL qua dart-define từ file JSON. File mẫu: app/config/dev.example.json, ios.example.json và device.example.json. Có thể sao chép thành app/config/dev.json để cấu hình riêng; không đưa bí mật vào cấu hình. Máy thật cần cùng LAN, backend mở cổng phù hợp và firewall cho phép truy cập.
+
+Android flavor **demo** cho phép HTTP phục vụ API đồ án. Flavor **production** giữ chính sách HTTP hạn chế; không dùng thiết lập demo để suy ra bảo mật triển khai thật.
+
+Lệnh kiểm tra và build, chạy trong app:
+
+```powershell
+flutter analyze
+flutter test
+flutter build apk --flavor demo --release --dart-define-from-file=config/dev.example.json
+```
+
+APK demo: app/build/app/outputs/flutter-apk/app-demo-release.apk. Đây là đường dẫn đầu ra dự kiến của lệnh, không phải khẳng định build đã thành công.
+
+Helper tùy chọn:
+
+```powershell
+# Từ repository; auto chọn Docker khi daemon sẵn sàng, nếu không dùng Node
+.\scripts\api.ps1 -Action start -Mode auto
+
+# Từ app; Action: run, test, analyze, build, integration
+.\tool\naugi.ps1 -Action run -ConfigPath config/dev.example.json
+```
+
+Node fallback chạy foreground, Ctrl+C để dừng. Backend helper còn có stop/logs/reset; xem [backend/README.md](backend/README.md). Helper app có -DeviceId khi cần chọn thiết bị.
 
 ## 6. Test Evidence
 
-*(Results for: airplane mode, slow/failed requests, empty data, rotation, different screen sizes.
-Full results: [`docs/testing-guide.md`](docs/testing-guide.md).)*
+Backend đã chạy kiểm tra cú pháp, 3/3 test và export seed kiểm tra 20 công thức/25 nguyên liệu trong phiên chuyển đổi. Flutter analyze đạt, 62/62 test đạt trong workspace và bản clone sạch. Bài kiểm tra REST thật dùng json-server cổng ngẫu nhiên và SQLite thật. Kết quả APK/Android và giới hạn được cập nhật riêng trong [testing-guide.md](docs/testing-guide.md).
 
----
+Các kịch bản airplane mode, timeout, xoay màn hình, kích thước khác nhau và permission có danh sách kiểm tra riêng, đang chờ bằng chứng thiết bị nếu chưa ghi kết quả. Ảnh minh họa trong mục 3 được chụp từ Flutter widget test và ghi đúng nguồn.
 
 ## 7. Documentation
 
-| Document | Content |
-|----------|---------|
-| [`docs/proposal.md`](docs/proposal.md) | M1 — problem, idea, scope, plan |
-| [`docs/ui-design.md`](docs/ui-design.md) | Users, flows, screens, wireframes, design tokens |
-| [`docs/architecture.md`](docs/architecture.md) | Layers, state management, data flow, offline strategy |
-| [`docs/api-integration.md`](docs/api-integration.md) | API contract and error handling |
-| [`docs/testing-guide.md`](docs/testing-guide.md) | Test methods and our test evidence |
-| [`docs/ai-log.md`](docs/ai-log.md) | AI usage log |
-
----
+| Tài liệu | Nội dung |
+|---|---|
+| [proposal.md](docs/proposal.md) | Vấn đề, người dùng, phạm vi và đánh đổi |
+| [ui-design.md](docs/ui-design.md) | Persona, luồng, màn hình, wireframe, token, 4 trạng thái |
+| [architecture.md](docs/architecture.md) | Phân lớp, state, dữ liệu và offline |
+| [api-integration.md](docs/api-integration.md) | REST, cấu hình và lỗi |
+| [testing-guide.md](docs/testing-guide.md) | Cách chạy, kết quả thật và kịch bản chưa xác minh |
+| [migration-plan.md](docs/migration-plan.md) | Các giai đoạn và bảo toàn dữ liệu cũ |
+| [source-provenance.md](docs/source-provenance.md) | URL/commit nguồn, phạm vi kế thừa và quyền dùng |
+| [oral-defense.md](docs/oral-defense.md) | Đường lần mã, câu hỏi và bài tập thay đổi |
+| [ai-log.md](docs/ai-log.md) | Nhật ký dùng AI, sinh viên tự ghi phần đã giữ/kiểm chứng |
 
 ## 8. AI Disclosure (mandatory)
 
-> Policy: [`INSTRUCTION.md` §7](INSTRUCTION.md#7-ai-usage-policy). Disclosing AI use never lowers your score — hiding it does.
+Chính sách: [INSTRUCTION.md §7](INSTRUCTION.md#7-ai-usage-policy). Sinh viên chịu trách nhiệm giải thích mọi mã được nhận, kể cả mã AI tạo và mã kế thừa.
 
 ### 8.1 Summary
 
-| Tool / model | Used by | Used for | Files / modules | Level |
-|--------------|---------|----------|-----------------|-------|
-| *(e.g., Claude)* | *(member)* | *(e.g., generate list screen, review offline cache)* | *(paths)* | *(Assist / Co-write / Generated)* |
+Bản nháp công khai việc hỗ trợ trong phiên chuyển đổi; nhóm tự bổ sung người dùng công cụ, đối chiếu diff và xác nhận mức độ.
 
-**Levels:** **Assist** — explanations, suggestions, review; we wrote the code. **Co-write** — AI drafted parts, we
-substantially rewrote. **Generated** — AI wrote most of it; we reviewed, tested and can explain it.
+| Tool / model | Used by | Used for | Files / modules | Level |
+|---|---|---|---|---|
+| OpenAI Codex | Sinh viên tự điền | Chuyển NauGi sang REST/SQLite theo phạm vi đã chọn; công cụ, kiểm thử và tài liệu | app/, backend/, scripts/, docs/, README | Generated draft — cần nhóm review/kiểm chứng |
+
+Mức Generated ở đây mô tả bản nháp do AI tạo, không khẳng định nhóm đã kiểm chứng hoặc có thể giải thích. Sinh viên tự ghi kết quả vào AI log.
 
 ### 8.2 Decisions we made ourselves
 
-*(Key design decisions made by the team, possibly after comparing AI-suggested options. E.g., "Kept a single
-source of truth in the local database and refresh it from the API, because users mostly open the app offline.")*
+Các lựa chọn người dùng đã xác nhận cho lần chuyển đổi: giữ Flutter Android; dùng json-server, không auth; recipe/ingredient dùng chung; dữ liệu cá nhân local; công thức ghi khi online. Đánh đổi được ghi trong proposal và architecture để nhóm đọc lại, xác nhận và bảo vệ.
 
 ### 8.3 Where AI was wrong — and how we found out
 
-*(At least one concrete example: a bug, wrong assumption or bad design from AI, and how you detected and fixed it.)*
+Chưa có ví dụ do sinh viên xác nhận trong bản nháp này. Nhóm bổ sung lỗi/giả định sai cụ thể đã thực sự phát hiện, cách tái hiện và cách sửa; không tạo câu chuyện kiểm chứng giả.
 
 ### 8.4 Full log
 
-See [`docs/ai-log.md`](docs/ai-log.md).
+Xem [docs/ai-log.md](docs/ai-log.md). Nguồn NauGi kế thừa được ghi riêng trong [source-provenance.md](docs/source-provenance.md).
 
 ---
 
