@@ -39,8 +39,8 @@ Tích hợp Android dùng flutter test integration_test --flavor demo --dart-def
 | Export seed từ catalog nguồn | Đã chạy tạo 20 công thức, 25 nguyên liệu; kiểm tra --check đạt | Dữ liệu minh họa, không xác nhận tính đúng dinh dưỡng |
 | Docker compose config | Đã kiểm tra cấu hình hợp lệ | Chưa chạy container vì daemon không sẵn sàng |
 | Flutter analyze/test | Đã chạy đạt, chi tiết ngay dưới bảng | Chưa chứng minh APK hoặc UI trên Android |
-| Flutter build APK | Đang kiểm tra trong lần chuyển đổi | Chỉ ghi đạt khi lệnh kết thúc và có APK thực |
-| Integration Android | Chưa xác minh trong bảng này | Cần thiết bị/emulator và backend thật |
+| Flutter build APK demo | Đã build thành công ngày 19/10/2026 sau khi chỉnh `integration_test` thành dependency thường | `app/build/app/outputs/flutter-apk/app-demo-release.apk`, 62.913.914 byte; SHA-256 `9496BFBBAF95EABE43AFEEB2924A5580F2FB55F7EC9E7223E0397417B958B1DE`; cấu hình `10.0.2.2:3000` |
+| Integration Android HTTP thật + SQLite thật | Đạt 1/1 ngày 19/10/2026 trên Android emulator API 35, 320 × 640, backend thử `10.0.2.2:3307` | Bài `real_rest_flow_test.dart` kiểm tra tải 20/25, lưu local, mở lại với API lỗi, đọc cache và màn hình Mua sắm; không thay thế kiểm tra thủ công airplane mode |
 
 ### Kết quả chạy ngày 19/10/2026 trong workspace chuyển đổi
 
@@ -50,11 +50,17 @@ Tích hợp Android dùng flutter test integration_test --flavor demo --dart-def
 | `flutter test --concurrency=1` trong `app/` | Đạt 62/62 bài kiểm tra | Phần lớn dùng API giả; bài `rest_contract_test.dart` khởi động json-server thật trên cổng ngẫu nhiên với SQLite thật |
 | `npm test --prefix backend` | Đạt 3/3, gồm CRUD HTTP thật trên dữ liệu thử độc lập | Không tác động `backend/runtime/db.json` của người dùng |
 | `flutter test --dart-define=CAPTURE_SCREENSHOTS=true test/guest_widget_test.dart` | Đạt 2/2; tạo [Hôm nay](asset/naugi-home-widget.png) và [chi tiết](asset/naugi-recipe-widget.png) | Ảnh render của Flutter widget test với API giả, chưa phải ảnh Android |
-| Bản clone sạch từ snapshot các file sẽ được nộp | `npm ci`, backend lint/test 3/3, `flutter pub get`, `flutter analyze`, Flutter test 62/62 đều đạt | Snapshot kiểm tra ở `.tools/clean-verification/clone`, không gồm SDK; APK và chạy Android cần ghi riêng |
+| Bản clone sạch từ snapshot các file sẽ được nộp | `npm ci`, backend lint/test 3/3, `flutter pub get`, `flutter analyze`, Flutter test 62/62 đều đạt | Snapshot kiểm tra ở `.tools/clean-verification/clone`, dùng SDK đã cài riêng trên máy |
+| Bản clone sạch sau khi thêm Gradle wrapper | `flutter pub get` và `flutter build apk --flavor demo --release --dart-define-from-file=config/dev.example.json` đạt; APK 62.913.914 byte | Snapshot `.tools/clean-verification-after-wrapper/clone`, SHA-256 APK `A9305769DB2F2B5A5E8B3FDA9A2F70F519DE36AA6881FC30D50C1BF111C4ECD7`; vẫn dùng Flutter/Android SDK ngoài repo theo hướng dẫn |
+| `flutter run --flavor demo` với API thử ở cổng 3307 | App mở được trên Android emulator API 35; đã chụp [Hôm nay](asset/naugi-android-home.png), [Công thức](asset/naugi-android-recipes.png), [Chi tiết](asset/naugi-android-detail.png) | Ảnh chụp bằng `adb screencap`; backend thử có seed 20/25, máy thật chưa kiểm tra |
 
-Bài `integration_test/guest_flow_test.dart` dùng SQLite thật nhưng API giả trong cùng tiến trình. Bài `test/rest_contract_test.dart` dùng HTTP qua json-server thật và SQLite thật. Kiểm tra Android chạy app với API thật vẫn cần thực hiện trên emulator hoặc máy thật trước khi đánh dấu các hàng M01–M22 là đạt.
+Bài `integration_test/guest_flow_test.dart` dùng SQLite thật nhưng API giả trong cùng tiến trình. Bài `test/rest_contract_test.dart` dùng HTTP qua json-server thật và SQLite thật. Bài Android dùng API thật được ghi ngay dưới; từng hàng M01–M22 là kiểm tra thủ công riêng và chỉ đánh dấu đạt khi có biên bản tương ứng.
 
-Lần build APK đầu trên Flutter 3.47.7 dừng ở `compileDemoReleaseJavaWithJavac`: Java registrant tạo sẵn tham chiếu plugin `integration_test`, trong khi Gradle loại plugin ở chế độ release do nó thuộc `dev_dependencies`. `app/pubspec.yaml` đã chuyển plugin này thành dependency thường để khớp registrant với Gradle; kết quả build lại sẽ ghi riêng sau khi lệnh kết thúc. Không dùng lần build lỗi làm bằng chứng APK.
+Bài `integration_test/real_rest_flow_test.dart` dùng HTTP thật từ Android tới `API_BASE_URL` và SQLite thật trong app. Nó đòi hỏi API trả seed 20 công thức/25 nguyên liệu. Cổng 3000 của máy thử đang bị dịch vụ khác chiếm, nên backend thử chạy ở 3307. Lệnh `flutter test integration_test/real_rest_flow_test.dart --flavor demo -d emulator-5554 --dart-define=API_BASE_URL=http://10.0.2.2:3307` đã kết thúc `All tests passed` ở lần chạy thứ hai. Lần đầu các khẳng định nghiệp vụ đạt nhưng test lỗi do gọi `dispose()` hai lần khi dọn dẹp; đã sửa mã test rồi chạy lại. Các ca thủ công M01–M22 bên dưới vẫn giữ trạng thái chưa xác minh nếu chưa có biên bản riêng.
+
+Lần build APK đầu trên Flutter 3.47.7 dừng ở `compileDemoReleaseJavaWithJavac`: Java registrant tạo sẵn tham chiếu plugin `integration_test`, trong khi Gradle loại plugin ở chế độ release do nó thuộc `dev_dependencies`. `app/pubspec.yaml` đã chuyển plugin này thành dependency thường để khớp registrant với Gradle; lần build thứ hai đã thành công. APK demo hiện ký bằng khóa debug theo cấu hình Gradle, phục vụ trình diễn môn học.
+
+Flutter 3.47.7 còn cảnh báo `flutter_timezone` đang dùng Kotlin Gradle Plugin; bản hiện tại build thành công nhưng nâng Flutter sau này cần đối chiếu phiên bản plugin và build lại. Cảnh báo SDK XML trên máy thử không làm thất bại các lệnh đã ghi.
 
 Số liệu ở trên chỉ nói về lần thực thi được người thực hiện báo lại trong phiên chuyển đổi, không áp dụng cho mã thay đổi về sau. Trước nộp bài cần bổ sung log tái lập gắn commit cuối.
 

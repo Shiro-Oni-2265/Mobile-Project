@@ -36,7 +36,7 @@ Màn hình: Hôm nay, Công thức, Chi tiết, Tạo/sửa công thức, Thực
 - Yêu thích và ảnh riêng trên từng thiết bị.
 - Tính định lượng/dinh dưỡng với thông báo thiếu dữ liệu; gợi ý giải thích được.
 
-Ảnh chụp từ bài kiểm tra Flutter widget ở kích thước 412 × 915, dùng API giả và dữ liệu minh họa: [màn hình Hôm nay](docs/asset/naugi-home-widget.png), [chi tiết công thức](docs/asset/naugi-recipe-widget.png). Đây là ảnh render thực tế của UI trong trình chạy kiểm thử; kiểm tra trên Android được ghi riêng ở [testing-guide.md](docs/testing-guide.md).
+Ảnh chụp thật trên Android emulator API 35, kích thước 320 × 640, app kết nối json-server thử ở cổng 3307: [Hôm nay](docs/asset/naugi-android-home.png), [Công thức](docs/asset/naugi-android-recipes.png), [Chi tiết](docs/asset/naugi-android-detail.png). Ảnh bổ sung từ Flutter widget test 412 × 915 dùng API giả: [Hôm nay](docs/asset/naugi-home-widget.png), [Chi tiết](docs/asset/naugi-recipe-widget.png).
 
 ## 4. Architecture
 
@@ -100,7 +100,7 @@ flutter test
 flutter build apk --flavor demo --release --dart-define-from-file=config/dev.example.json
 ```
 
-APK demo: app/build/app/outputs/flutter-apk/app-demo-release.apk. Đây là đường dẫn đầu ra dự kiến của lệnh, không phải khẳng định build đã thành công.
+APK demo đã build ngày 19/10/2026: `app/build/app/outputs/flutter-apk/app-demo-release.apk` (62.913.914 byte). Tệp build nằm ngoài Git; clone mới chạy lệnh trên để tạo lại. Chi tiết hash và giới hạn kiểm tra: [testing-guide.md](docs/testing-guide.md).
 
 Helper tùy chọn:
 
@@ -116,9 +116,9 @@ Node fallback chạy foreground, Ctrl+C để dừng. Backend helper còn có st
 
 ## 6. Test Evidence
 
-Backend đã chạy kiểm tra cú pháp, 3/3 test và export seed kiểm tra 20 công thức/25 nguyên liệu trong phiên chuyển đổi. Flutter analyze đạt, 62/62 test đạt trong workspace và bản clone sạch. Bài kiểm tra REST thật dùng json-server cổng ngẫu nhiên và SQLite thật. Kết quả APK/Android và giới hạn được cập nhật riêng trong [testing-guide.md](docs/testing-guide.md).
+Backend đã chạy kiểm tra cú pháp, 3/3 test và export seed kiểm tra 20 công thức/25 nguyên liệu trong phiên chuyển đổi. Flutter analyze đạt, 62/62 test đạt trong workspace và bản clone sạch. APK demo đã build cả từ bản clone sạch; kiểm tra tích hợp Android qua REST thật và SQLite thật đạt 1/1 trên emulator. Kịch bản, môi trường và giới hạn nằm trong [testing-guide.md](docs/testing-guide.md).
 
-Các kịch bản airplane mode, timeout, xoay màn hình, kích thước khác nhau và permission có danh sách kiểm tra riêng, đang chờ bằng chứng thiết bị nếu chưa ghi kết quả. Ảnh minh họa trong mục 3 được chụp từ Flutter widget test và ghi đúng nguồn.
+Các kịch bản airplane mode thủ công, timeout, xoay màn hình, kích thước khác nhau và permission có danh sách kiểm tra riêng, đang chờ bằng chứng nếu chưa ghi kết quả. Ảnh trong mục 3 ghi rõ ảnh Android và ảnh widget test.
 
 ## 7. Documentation
 

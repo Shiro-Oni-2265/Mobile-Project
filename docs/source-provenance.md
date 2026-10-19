@@ -6,7 +6,7 @@
 - Commit dùng làm mốc: `9a776ee0932dea678e1ddfd77175013e2d8b37ab`.
 - Bản checkout tham chiếu cục bộ: `.tools/naugi-source/`.
 - Mã Flutter nhập vào `app/`; catalog nguồn là cơ sở xuất seed backend.
-- Lịch sử nguồn được fetch vào ref cục bộ `refs/remotes/naugi-source/main` để tra cứu. Ref remote cục bộ không tự đi theo một lần clone Git mới; commit/hash và URL trên là mốc tái đối chiếu.
+- Lịch sử nguồn được fetch vào ref cục bộ `refs/remotes/naugi-source/main` và nối vào nhánh chuyển đổi bằng merge `ours` ở commit `f6f4988`. Merge này giữ toàn bộ ancestry của NauGi mà không ghi đè cấu trúc bài tập. Một bản clone Git của nhánh sau merge vẫn truy cập được commit nguồn `9a776ee`.
 
 Giữ thư mục nguồn tham chiếu tách khỏi app đang phát triển. Không coi việc nhập một snapshot là bằng chứng các thành viên đã tự viết toàn bộ mã nguồn.
 
@@ -32,4 +32,4 @@ git log refs/remotes/naugi-source/main --oneline -5
 git diff -- app docs backend
 ```
 
-Hai lệnh đầu chỉ hoạt động khi object/ref nguồn còn trong bản Git hiện tại. Ở clone mới, dùng repository và commit đã ghi để lấy lại nguồn nếu cần. Đối chiếu bằng diff theo file, không suy ra tác giả hoặc tỷ lệ đóng góp từ số dòng.
+Trong bản clone mới của nhánh đã merge, `git show 9a776ee` và `git log 9a776ee` hoạt động nhờ ancestry; ref `refs/remotes/naugi-source/main` chỉ tồn tại ở máy thực hiện chuyển đổi. Đối chiếu bằng diff theo file, không suy ra tác giả hoặc tỷ lệ đóng góp từ số dòng.
